@@ -6,13 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
 public class BaseQuery {
 	protected Connection con;
 	private final String db = "jdbc:mysql://localhost:3306/classicmodels";
 
 	public BaseQuery(String uname, String pwd){
 		try {
-		      //Class.forName("com.mysql.jdbc.Driver");
+		    Class.forName("com.mysql.jdbc.Driver");
 			DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver ());
 			con = DriverManager.getConnection( db, uname, pwd);
 		}
@@ -26,6 +27,13 @@ public class BaseQuery {
 		Statement s = con.createStatement();
 		ResultSet rs = s.executeQuery(query);
 		return rs;
+	}
+	
+	protected ResultSet ExecuteQuery(String sql) throws SQLException{
+		Statement s = con.createStatement();
+		ResultSet rs = s.executeQuery(sql);
+		return rs;
+		
 	}
 
 }

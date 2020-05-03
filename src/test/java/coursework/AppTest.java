@@ -1,8 +1,19 @@
 package coursework;
 
+import java.sql.*;
+import org.junit.*;
+import com.mysql.*;
+
+
 public class AppTest {
-	
-	private int test = 1;
-	private int test2 = 2;
+	@Test
+	public void Can_retrieve_all_customers_without_sales_rep() throws SQLException{
+		
+		CustomerData cd = new CustomerData("","");
+		
+		ResultSet rs = cd.AllWithoutSalesRep();
+		
+		Assert.assertEquals(22, rs.getRow());
+	}
 
 }

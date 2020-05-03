@@ -1,6 +1,7 @@
 package coursework;
 
-public class Customers {
+
+public class Customer {
 	private int CustomerNumber;
 	private String CustomerName;
 	private String ContactLastName;
@@ -15,7 +16,7 @@ public class Customers {
 	private int SalesRepEmployeeNumber;
 	private double CreditLimit;
 	
-	public Customers(int CustomerNumber, String CustomerName, String ContactLastName, String ContactFirstName, String Phone, String AddressLine1, 
+	public Customer(int CustomerNumber, String CustomerName, String ContactLastName, String ContactFirstName, String Phone, String AddressLine1, 
 			String AddressLine2, String City, String State, String PostalCode, String Country, int SalesRepEmployeeNumber, double CreditLimit) {
 		// Super here for convention
 		super();
