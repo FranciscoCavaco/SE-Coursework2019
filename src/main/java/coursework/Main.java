@@ -5,7 +5,7 @@ import java.sql.*;
 public class Main {
 
 	public static void main(String[] args) {
-		CustomerData customerData = new CustomerData("root", "Xixoxixo2010a");
+		CustomerData customerData = new CustomerData("root", "pwd");
 		
 		if (customerData != null) {
 			System.out.println("yay");
