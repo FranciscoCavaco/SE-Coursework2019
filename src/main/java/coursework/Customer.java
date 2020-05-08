@@ -1,90 +1,113 @@
 package coursework;
 
+import java.util.ArrayList;
 
 public class Customer {
-	private int CustomerNumber;
-	private String CustomerName;
-	private String ContactLastName;
-	private String ContactFirstName;
-	private String Phone;
-	private String AddressLine1;
-	private String AddressLine2;
-	private String City;
-	private String State;
-	private String PostalCode;
-	private String Country;
-	private int SalesRepEmployeeNumber;
-	private double CreditLimit;
+	private int customerNumber;
+	private String customerName;
+	private String contactLastName;
+	private String contactFirstName;
+	private String phone;
+	private String addressLine1;
+	private String addressLine2;
+	private String city;
+	private String state;
+	private String postalCode;
+	private String country;
+	private int salesRepEmployeeNumber;
+	private double creditLimit;
+	private ArrayList<Payment> payments;
+	
 	
 	public Customer(int CustomerNumber, String CustomerName, String ContactLastName, String ContactFirstName, String Phone, String AddressLine1, 
-			String AddressLine2, String City, String State, String PostalCode, String Country, int SalesRepEmployeeNumber, double CreditLimit) {
+			String AddressLine2, String City, String State, String PostalCode, String Country, int SalesRepEmployeeNumber, double CreditLimit, ArrayList<Payment> payments) {
 		// Super here for convention
 		super();
-		this.CustomerNumber = CustomerNumber;
-		this.CustomerName = CustomerName;
-		this.ContactLastName = ContactLastName;
-		this.ContactFirstName = ContactFirstName;
-		this.Phone = Phone;
-		this.AddressLine1 = AddressLine1;
-		this.AddressLine2 = AddressLine2;
-		this.City = City;
-		this.State = State;
-		this.PostalCode = PostalCode;
-		this.Country = Country;
-		this.SalesRepEmployeeNumber = SalesRepEmployeeNumber;
-		this.CreditLimit = CreditLimit;
+		this.customerNumber = CustomerNumber;
+		this.customerName = CustomerName;
+		this.contactLastName = ContactLastName;
+		this.contactFirstName = ContactFirstName;
+		this.phone = Phone;
+		this.addressLine1 = AddressLine1;
+		this.addressLine2 = AddressLine2;
+		this.city = City;
+		this.state = State;
+		this.postalCode = PostalCode;
+		this.country = Country;
+		this.salesRepEmployeeNumber = SalesRepEmployeeNumber;
+		this.creditLimit = CreditLimit;
+		this.payments = payments;
+		
 	}
 
 	public int getCustomerNumber() {
-		return CustomerNumber;
+		return this.customerNumber;
 	}
 
 	public String getCustomerName() {
-		return CustomerName;
+		return this.customerName;
 	}
 
 	public String getContactLastName() {
-		return ContactLastName;
+		return this.contactLastName;
 	}
 
 	public String getContactFirstName() {
-		return ContactFirstName;
+		return this.contactFirstName;
 	}
 
 	public String getPhone() {
-		return Phone;
+		return this.phone;
 	}
 
 	public String getAddressLine1() {
-		return AddressLine1;
+		return this.addressLine1;
 	}
 
 	public String getAddressLine2() {
-		return AddressLine2;
+		return this.addressLine2;
 	}
 
 	public String getCity() {
-		return City;
+		return this.city;
 	}
 
 	public String getState() {
-		return State;
+		return this.state;
 	}
 
 	public String getPostalCode() {
-		return PostalCode;
+		return this.postalCode;
 	}
 
 	public String getCountry() {
-		return Country;
+		return this.country;
 	}
 
 	public int getSalesRepEmployeeNumber() {
-		return SalesRepEmployeeNumber;
+		return this.salesRepEmployeeNumber;
 	}
 
 	public double getCreditLimit() {
-		return CreditLimit;
+		return this.creditLimit;
+	}
+	
+	public ArrayList<Payment> getPayments() {
+		return this.payments;
+	}
+	
+	public Payment getHighestPayment() {
+		Payment highest = null;
+		
+		for(Payment p : payments) 
+		{
+			if(p.getAmount() > highest.getAmount()) {
+				highest = p;
+			}
+			
+		}
+		
+		return highest;
 	}
 	
 

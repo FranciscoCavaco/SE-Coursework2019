@@ -5,16 +5,22 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 
 public class BaseQuery {
 	protected Connection con;
-	private final String db = "jdbc:mysql://localhost:3306/classicmodels";
+	private final String db = "jdbc:mysql://localhost:3306/classicmodels?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	//jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
 
 	public BaseQuery(String uname, String pwd){
 		try {
-		    Class.forName("com.mysql.jdbc.Driver");
-			DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver ());
+		    Class.forName("com.mysql.cj.jdbc.Driver");
+		    com.mysql.cj.jdbc.Driver driver = new com.mysql.cj.jdbc.Driver ();
+		    
+		    DriverManager.registerDriver(driver);
+			
+			
 			con = DriverManager.getConnection( db, uname, pwd);
 		}
 		catch(Exception e) {
@@ -29,11 +35,20 @@ public class BaseQuery {
 		return rs;
 	}
 	
-	protected ResultSet ExecuteQuery(String sql) throws SQLException{
-		Statement s = con.createStatement();
-		ResultSet rs = s.executeQuery(sql);
-		return rs;
-		
+	protected void Close() {
+		try {
+		 	
+			if(!con.isClosed())
+			{
+				con.close();
+			}
+			
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
 	}
+	
+
 
 }
