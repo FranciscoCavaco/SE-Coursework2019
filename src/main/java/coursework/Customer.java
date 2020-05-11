@@ -2,7 +2,7 @@ package coursework;
 
 import java.util.ArrayList;
 
-public class Customer {
+public class Customer implements Comparable<Customer>  {
 	private int customerNumber;
 	private String customerName;
 	private String contactLastName;
@@ -17,11 +17,24 @@ public class Customer {
 	private int salesRepEmployeeNumber;
 	private double creditLimit;
 	private ArrayList<Payment> payments;
+	private ArrayList<Order> orders;
 	
+	//Requirement 2
+	public Customer(int CustomerNumber, String CustomerName, String City) {
+		super();
+	}
 	
+	//Requirement 3
+	public Customer(int CustomerNumber, String CustomerName, ArrayList<Order> orders) {
+		super();
+		this.customerNumber = CustomerNumber;
+		this.customerName = CustomerName;
+		this.orders = orders;
+	}
+	
+		
 	public Customer(int CustomerNumber, String CustomerName, String ContactLastName, String ContactFirstName, String Phone, String AddressLine1, 
-			String AddressLine2, String City, String State, String PostalCode, String Country, int SalesRepEmployeeNumber, double CreditLimit, ArrayList<Payment> payments) {
-		// Super here for convention
+			String AddressLine2, String City, String State, String PostalCode, String Country, int SalesRepEmployeeNumber, double CreditLimit, ArrayList<Payment> payments, ArrayList<Order> orders) {
 		super();
 		this.customerNumber = CustomerNumber;
 		this.customerName = CustomerName;
@@ -37,6 +50,7 @@ public class Customer {
 		this.salesRepEmployeeNumber = SalesRepEmployeeNumber;
 		this.creditLimit = CreditLimit;
 		this.payments = payments;
+		this.orders = orders;
 		
 	}
 
@@ -96,19 +110,56 @@ public class Customer {
 		return this.payments;
 	}
 	
-	public Payment getHighestPayment() {
-		Payment highest = null;
-		
-		for(Payment p : payments) 
-		{
-			if(p.getAmount() > highest.getAmount()) {
-				highest = p;
-			}
-			
-		}
-		
-		return highest;
+	public ArrayList<Order> getOrders() {
+		return this.orders;
 	}
+	
+	public int getOrderCount() {
+		if (orders == null)
+		{
+			return 0;
+		}
+		else
+		{
+			return orders.size();
+		}
+	}
+	
+	public double getOrderTimeLapseAverage() {
+		
+		double orderTotal = 0.0;
+		for (Order o : orders) {
+			orderTotal += o.getDiffDate(o);
+		}
+		double average = orderTotal/orders.size();
+		return average;
+	}
+
+	public int compareTo(Customer otherCustomer) {
+		
+		if (this.getCustomerNumber() == otherCustomer.getCustomerNumber() )
+			return 0;
+		else if(this.getCustomerNumber() > otherCustomer.getCustomerNumber() )
+			return 1;
+		else
+			return -1;
+	}
+	
+	
+	
+
+//	public Payment getHighestAverage() {
+//		Payment highest = null;
+//		
+//		for(Order o : orders) 
+//		{
+//			if(o.getAmount() > highest.getAmount()) {
+//				highest = p;
+//			}
+//			
+//		}
+//		return highest;
+//	}
 	
 
 }

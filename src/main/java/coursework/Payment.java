@@ -2,18 +2,20 @@ package coursework;
 
 import java.util.*;
 
-public class Payment {
+public class Payment  implements Comparable<Payment>{ 
 	private int customerNumber;
+	private String customerName;
 	private String checkNumber;
 	private Date paymentDate;
 	private double amount;
 	
-	public Payment(int CustomerNumber, String CheckNumber, Date PaymentDate, double Amount) {
+	public Payment(int CustomerNumber, String CheckNumber, Date PaymentDate, double Amount, String CustomerName) {
 		super();
 		this.customerNumber = CustomerNumber;
 		this.checkNumber = CheckNumber;
 		this.paymentDate = PaymentDate;
 		this.amount = Amount;
+		this.customerName = CustomerName;
 	}
 
 	public int getCustomerNumber() {
@@ -30,6 +32,11 @@ public class Payment {
 
 	public double getAmount() {
 		return this.amount;
+	}
+
+	public int compareTo(Payment o) {
+		
+		return 0;
 	}	
 
 }
