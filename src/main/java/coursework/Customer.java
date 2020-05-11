@@ -5,17 +5,18 @@ import java.util.ArrayList;
 public class Customer implements Comparable<Customer>  {
 	private int customerNumber;
 	private String customerName;
+	private String city;
 	private String contactLastName;
 	private String contactFirstName;
 	private String phone;
 	private String addressLine1;
 	private String addressLine2;
-	private String city;
 	private String state;
 	private String postalCode;
 	private String country;
 	private int salesRepEmployeeNumber;
 	private double creditLimit;
+	
 	private ArrayList<Payment> payments;
 	private ArrayList<Order> orders;
 	
@@ -34,7 +35,7 @@ public class Customer implements Comparable<Customer>  {
 	
 		
 	public Customer(int CustomerNumber, String CustomerName, String ContactLastName, String ContactFirstName, String Phone, String AddressLine1, 
-			String AddressLine2, String City, String State, String PostalCode, String Country, int SalesRepEmployeeNumber, double CreditLimit, ArrayList<Payment> payments, ArrayList<Order> orders) {
+			String AddressLine2, String City, String State, String PostalCode, String Country, int SalesRepEmployeeNumber, double CreditLimit, ArrayList<Order> orders) {
 		super();
 		this.customerNumber = CustomerNumber;
 		this.customerName = CustomerName;
@@ -49,7 +50,6 @@ public class Customer implements Comparable<Customer>  {
 		this.country = Country;
 		this.salesRepEmployeeNumber = SalesRepEmployeeNumber;
 		this.creditLimit = CreditLimit;
-		this.payments = payments;
 		this.orders = orders;
 		
 	}
@@ -104,10 +104,6 @@ public class Customer implements Comparable<Customer>  {
 
 	public double getCreditLimit() {
 		return this.creditLimit;
-	}
-	
-	public ArrayList<Payment> getPayments() {
-		return this.payments;
 	}
 	
 	public ArrayList<Order> getOrders() {

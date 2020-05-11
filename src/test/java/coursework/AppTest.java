@@ -24,9 +24,9 @@ public class AppTest {
 	public void Setup() {
 		System.out.println("Running: Setup");
 		
-		paymentData = new PaymentData("root","", customerData);
-		orderData = new OrderData("root","");
-		customerData = new CustomerData("root","", paymentData, orderData);
+		orderData = new OrderData("root","Xixoxixo2010a");
+		customerData = new CustomerData("root","Xixoxixo2010a", orderData);
+		paymentData = new PaymentData("root","Xixoxixo2010a", customerData);
 	}
 	
 	//Requirement 1
@@ -65,7 +65,7 @@ public class AppTest {
 		
 		Customer customer = customerData.For(customerNumber);
 		
-		assertEquals( 2.3333 ,customer.getOrderTimeLapseAverage(), 0.0);
+		assertEquals( 2.3333 ,customer.getOrderTimeLapseAverage(), 0.0001);
 	}
 
 	@Test
@@ -89,8 +89,6 @@ public class AppTest {
 	@Test
 	public void can_sort_orders_by_time_lapse() throws ParseException {
 		// (int OrderNumber, Date OrderDate, Date RequiredDate, Date ShippedDate, String Status, String Comments, int CustomerNumber)
-		
-		@SuppressWarnings("deprecation")
 		
 		// customer 1
 		// ----------

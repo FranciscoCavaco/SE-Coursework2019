@@ -34,7 +34,7 @@ public class Payment  implements Comparable<Payment>{
 		return this.amount;
 	}
 
-	public int compareTo(Payment o) {
+	public int compareTo(Payment p) {
 		
 		return 0;
 	}	

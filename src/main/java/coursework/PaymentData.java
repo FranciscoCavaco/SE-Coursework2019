@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
+import com.mysql.cj.conf.ConnectionUrlParser.Pair;
+
 public class PaymentData extends BaseQuery{
 
-	CustomerData customerData = null;
+	private CustomerData customerData;
 	
 	public PaymentData(String uname, String pwd, CustomerData customerData) {
 		super(uname, pwd);
@@ -55,7 +57,12 @@ public class PaymentData extends BaseQuery{
 		return payments;
 	}
 	
+	public void Close() {
+		super.Close();
+		
+	}
 	
+
 	public  ArrayList<Payment> PaymentAbove(double value) throws SQLException{
 		ArrayList<Payment> result = new ArrayList<Payment>();
 		ArrayList<Payment> payments = All();

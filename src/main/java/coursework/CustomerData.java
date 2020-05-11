@@ -7,12 +7,10 @@ import java.util.*;
 
 public class CustomerData extends BaseQuery 
 {
-	private PaymentData paymentData;
 	private OrderData orderData;
 
-	public CustomerData(String uname, String pwd, PaymentData paymentData, OrderData orderData) {
+	public CustomerData(String uname, String pwd, OrderData orderData) {
 		super(uname, pwd);
-		this.paymentData = paymentData;
 		this.orderData = orderData;
 	}
 	
@@ -36,7 +34,7 @@ public class CustomerData extends BaseQuery
 		
 		ArrayList<Order> orders = orderData.AllFor(customerNumber);
 		
-		Customer customer = new Customer(customerNumber, customerName, contactLastName, contactFirstName, phone, AddressLine1, AddressLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit, null, orders);
+		Customer customer = new Customer(customerNumber, customerName, contactLastName, contactFirstName, phone, AddressLine1, AddressLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit, orders);
 		
 		return customer; 
 	}
@@ -86,22 +84,6 @@ public class CustomerData extends BaseQuery
 	public void Close() {
 		super.Close();
 		
-	}
-
-//Apagar depois talvez dependendo de resposta
-	public ArrayList<Customer> AllWithPaymentAmountAbove(double greaterThanAmount) throws SQLException {
-		
-		// get all customers
-		ArrayList<Customer> result = new ArrayList<Customer>();
-		ArrayList<Customer> customers = All();
-		
-		// filter for highest payment amount greater than greaterThanAmount
-		for (Customer c : customers) {
-			//if(c.getHighestPayment() > paymentData.PaymentAbove(greaterThanAmount)) {}
-		}
-		// order descending  by highest payment amount
-		
-		return result;
 	}
 	
 	
@@ -154,45 +136,5 @@ public class CustomerData extends BaseQuery
 		Collections.sort(customers, new OrderAverageTimeLapseSorter());
 		Collections.reverse(customers);
 	}
-	
-	public static void mergeSort(int[] a, int n) {
-	    if (n < 2) {
-	        return;
-	    }
-	    int mid = n / 2;
-	    int[] left = new int[mid];
-	    int[] right = new int[n - mid];
-	 
-	    for (int i = 0; i < mid; i++) {
-	        left[i] = a[i];
-	    }
-	    for (int i = mid; i < n; i++) {
-	        right[i - mid] = a[i];
-	    }
-	    mergeSort(left, mid);
-	    mergeSort(right, n - mid);
-	 
-	    merge(a, left, right, mid, n - mid);
-	}
-	
-	public static void merge(
-			  int[] a, int[] l, int[] r, int left, int right) {
-			  
-			    int i = 0, j = 0, k = 0;
-			    while (i < left && j < right) {
-			        if (l[i] >= r[j]) {
-			            a[k++] = l[i++];
-			        }
-			        else {
-			            a[k++] = r[j++];
-			        }
-			    }
-			    while (i < left) {
-			        a[k++] = l[i++];
-			    }
-			    while (j < right) {
-			        a[k++] = r[j++];
-			    }
-			}
 
 }
