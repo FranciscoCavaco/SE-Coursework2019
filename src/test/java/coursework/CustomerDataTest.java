@@ -14,19 +14,29 @@ import com.mysql.*;
 import org.junit.Before;
 
 
-public class AppTest {
+public class CustomerDataTest {
 	
 	private CustomerData customerData = null;
-	private PaymentData paymentData = null;
 	private OrderData orderData = null;
+	private BaseQuery baseQuery = null;
 	
 	@Before
 	public void Setup() {
 		System.out.println("Running: Setup");
 		
-		orderData = new OrderData("root","Xixoxixo2010a");
-		customerData = new CustomerData("root","Xixoxixo2010a", orderData);
-		paymentData = new PaymentData("root","Xixoxixo2010a", customerData);
+		orderData = new OrderData("root","");
+		customerData = new CustomerData("root","", orderData);
+		baseQuery = new BaseQuery("root","");
+	}
+	
+	//Build up tests
+	@Test
+	public void Can_retrieve_all_customers() throws SQLException{
+		
+		ArrayList<Customer> customers = customerData.All();
+		
+		assertEquals(122,customers.size());
+		
 	}
 	
 	//Requirement 1
@@ -37,25 +47,7 @@ public class AppTest {
 		assertEquals(22,customers.size());
 	}
 	
-	@Test
-	public void Can_retrieve_all_customers() throws SQLException{
-		
-		ArrayList<Customer> customers = customerData.All();
-		
-		assertEquals(122,customers.size());
-		
-	}
-
 	
-	
-	//requirement 2
-	@Test
-	public void Can_retrieve_all_payments() throws SQLException{
-		
-		ArrayList<Payment> payments = paymentData.All();
-		
-		assertEquals(273,payments.size());
-	}
 	
 	//requirement 3
 	@Test
@@ -68,27 +60,10 @@ public class AppTest {
 		assertEquals( 2.3333 ,customer.getOrderTimeLapseAverage(), 0.0001);
 	}
 
-	@Test
-	public void Can_retrieve_all_orders() throws SQLException{
-		
-		ArrayList<Order> orders = orderData.All();
-		
-		assertEquals(326,orders.size());
-	}
 	
-	@Test
-	public void Can_retrieve_all_orders_for_a_customer() throws SQLException{
-		
-		int customerNumber = 103;
-		
-		ArrayList<Order> orders = orderData.AllFor(customerNumber);
-		
-		assertEquals(3,orders.size());
-	}
-	
+	//Customer time Order sort using mock data
 	@Test
 	public void can_sort_orders_by_time_lapse() throws ParseException {
-		// (int OrderNumber, Date OrderDate, Date RequiredDate, Date ShippedDate, String Status, String Comments, int CustomerNumber)
 		
 		// customer 1
 		// ----------
@@ -164,9 +139,7 @@ public class AppTest {
 		assertTrue("This is not expected customer...", c2cn == ac0);
 		assertTrue(c1cn == ac1);
 		assertTrue(c3cn == ac2);
-		
-		
-		
+	
 	}
 	
 
@@ -174,7 +147,6 @@ public class AppTest {
     public void TearDown() throws Exception {
         System.out.println("Running: tearDown");
         customerData.Close();
-        paymentData.Close();
         orderData.Close();
     }
 

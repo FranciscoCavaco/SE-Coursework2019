@@ -3,6 +3,8 @@ package coursework;
 import java.util.*;
 
 public class Order {
+	
+	//Attribute declaration
 	private int orderNumber;
 	private Date orderDate;
 	private Date requiredDate;
@@ -11,6 +13,8 @@ public class Order {
 	private String comments;
 	private int customerNumber;
 	
+	
+	//Constructor
 	public Order (int OrderNumber, Date OrderDate, Date RequiredDate, Date ShippedDate, String Status, String Comments, int CustomerNumber) {
 		super();
 		this.orderNumber = OrderNumber;
@@ -22,6 +26,8 @@ public class Order {
 		this.customerNumber = CustomerNumber;
 	}
 
+	
+	//getters
 	public int getOrderNumber() {
 		return this.orderNumber;
 	}
@@ -50,34 +56,13 @@ public class Order {
 		return this.customerNumber;
 	}
 	
-	public int getDiffDate(Order o){
+	
+	//calculates time between order date and shipping data
+	public int getShippingTimeLapse(){
 		int diff = 0;
 		long convertToDay = 86400000;
-		diff = (int) ((o.getShippedDate().getTime())/convertToDay - (o.getOrderDate().getTime())/convertToDay);
+		diff = (int) ((this.getShippedDate().getTime())/convertToDay - (this.getOrderDate().getTime())/convertToDay);
 		return diff;
 	}
-	/*
-	public int getAverage(int numOfOrders){
-		int diff = 0;
-		long convertToDay = 86400000;
-		for(Order o : orders)
-		{
-			diff = diff + (int) ((o.getShippedDate().getTime())/convertToDay - (o.getOrderDate().getTime())/convertToDay);
-		}
-		return diff/numOfOrders;
-	}
-
-
-	public int compareTo(Order o) {
-		
-		if (this.getDiffDate(o) == 0 )
-			return 0;
-		else if(this.getDiffDate(o) > 0)
-			return 1;
-		else
-			return -1;
-	}
-	
-	*/
 
 }

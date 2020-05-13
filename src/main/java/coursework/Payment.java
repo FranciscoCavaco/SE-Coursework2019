@@ -2,24 +2,42 @@ package coursework;
 
 import java.util.*;
 
-public class Payment  implements Comparable<Payment>{ 
+public class Payment {
+	
+	//Attribute declaration
 	private int customerNumber;
 	private String customerName;
 	private String checkNumber;
 	private Date paymentDate;
 	private double amount;
 	
-	public Payment(int CustomerNumber, String CheckNumber, Date PaymentDate, double Amount, String CustomerName) {
+	
+	//Constructor for Req 2
+	public Payment(Customer c, Payment p) {
+		super();
+		this.customerNumber = p.getCustomerNumber();
+		this.customerName = c.getCustomerName();
+		this.amount = p.getAmount();
+	}
+	
+	
+	//Constructor with all attributes
+	public Payment(int CustomerNumber, String CheckNumber, Date PaymentDate, double Amount) {
 		super();
 		this.customerNumber = CustomerNumber;
 		this.checkNumber = CheckNumber;
 		this.paymentDate = PaymentDate;
 		this.amount = Amount;
-		this.customerName = CustomerName;
 	}
 
+	
+	//getters
 	public int getCustomerNumber() {
 		return this.customerNumber;
+	}
+
+	public String getCustomerName() {
+		return this.customerName;
 	}
 
 	public String getCheckNumber() {
@@ -34,9 +52,10 @@ public class Payment  implements Comparable<Payment>{
 		return this.amount;
 	}
 
-	public int compareTo(Payment p) {
-		
-		return 0;
-	}	
+	
+	//method used to print Second Requirement in console
+	public void printMeConsole() {
+		System.out.printf("%d | %s | $ %.2f \n\r", this.getCustomerNumber(), this.getCustomerName(),this.getAmount());
+	}
 
 }

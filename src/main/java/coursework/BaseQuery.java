@@ -35,6 +35,14 @@ public class BaseQuery {
 		return rs;
 	}
 	
+	
+	//used for Test Cases
+	protected ResultSet TestQuery(String query) throws SQLException{
+		Statement s = con.createStatement();
+		ResultSet rs = s.executeQuery(query);
+		return rs;
+	}
+	
 	protected void Close() {
 		try {
 		 	

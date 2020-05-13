@@ -2,6 +2,8 @@ package coursework;
 
 import java.util.Comparator;
 
+
+//used to sort payments by amount
 public class PaymentAmountSorter  implements Comparator<Payment>{
 	public int compare(Payment p1, Payment p2) {
 		if (p1.getAmount() == p2.getAmount())

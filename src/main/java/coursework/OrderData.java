@@ -7,10 +7,14 @@ import java.util.Date;
 
 public class OrderData extends BaseQuery{
 	
+	
+	//Initiates BaseQuery class (starts DB) 
 	public OrderData(String uname, String pwd) {
 		super(uname, pwd);
 	}
 	
+	
+	//converts sql to java using ResultSet
 	private Order build(ResultSet rs) throws SQLException
 	{
 		int orderNumber = rs.getInt("OrderNumber");
@@ -28,6 +32,7 @@ public class OrderData extends BaseQuery{
 	}
 	
 	
+	//method used for getting all orders in DB 
 	public ArrayList<Order> All() throws SQLException{
 		
 		//fetch all rows for table (Orders)
@@ -47,6 +52,7 @@ public class OrderData extends BaseQuery{
 	}
 	
 	
+	//used for joining orders table with customers table
 	public ArrayList<Order> AllFor(int customerNumber) throws SQLException{
 		
 		//for all orders

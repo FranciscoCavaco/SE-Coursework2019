@@ -2,6 +2,7 @@ package coursework;
 
 import java.util.Comparator;
  
+//used to sort Order Timelapse
 public class OrderAverageTimeLapseSorter  implements Comparator<Customer>{
  
 	public int compare(Customer c1, Customer c2) {

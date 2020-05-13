@@ -2,7 +2,10 @@ package coursework;
 
 import java.util.ArrayList;
 
-public class Customer implements Comparable<Customer>  {
+
+public class Customer   {
+	
+	//attribute declaration
 	private int customerNumber;
 	private String customerName;
 	private String city;
@@ -20,12 +23,12 @@ public class Customer implements Comparable<Customer>  {
 	private ArrayList<Payment> payments;
 	private ArrayList<Order> orders;
 	
-	//Requirement 2
+	//Constructor (with attributes needed for Req 1)
 	public Customer(int CustomerNumber, String CustomerName, String City) {
 		super();
 	}
 	
-	//Requirement 3
+	//Constructor (with attributes needed for Req 3)
 	public Customer(int CustomerNumber, String CustomerName, ArrayList<Order> orders) {
 		super();
 		this.customerNumber = CustomerNumber;
@@ -33,7 +36,7 @@ public class Customer implements Comparable<Customer>  {
 		this.orders = orders;
 	}
 	
-		
+	//Constructor (with all attributes)
 	public Customer(int CustomerNumber, String CustomerName, String ContactLastName, String ContactFirstName, String Phone, String AddressLine1, 
 			String AddressLine2, String City, String State, String PostalCode, String Country, int SalesRepEmployeeNumber, double CreditLimit, ArrayList<Order> orders) {
 		super();
@@ -54,6 +57,8 @@ public class Customer implements Comparable<Customer>  {
 		
 	}
 
+	
+	//getters
 	public int getCustomerNumber() {
 		return this.customerNumber;
 	}
@@ -110,6 +115,8 @@ public class Customer implements Comparable<Customer>  {
 		return this.orders;
 	}
 	
+	
+	//gets size of Order arraylist
 	public int getOrderCount() {
 		if (orders == null)
 		{
@@ -121,41 +128,37 @@ public class Customer implements Comparable<Customer>  {
 		}
 	}
 	
+	
+	//Calculates average time from Order date and Ship date per specific customer (used for Req. 3)
 	public double getOrderTimeLapseAverage() {
+		
+		int orderSize = 0;
 		
 		double orderTotal = 0.0;
 		for (Order o : orders) {
-			orderTotal += o.getDiffDate(o);
+			if(o.getShippedDate() != null && o.getOrderDate() != null)
+			{
+				orderTotal += o.getShippingTimeLapse();
+				orderSize++;	
+			}
 		}
-		double average = orderTotal/orders.size();
-		return average;
-	}
-
-	public int compareTo(Customer otherCustomer) {
 		
-		if (this.getCustomerNumber() == otherCustomer.getCustomerNumber() )
-			return 0;
-		else if(this.getCustomerNumber() > otherCustomer.getCustomerNumber() )
-			return 1;
-		else
-			return -1;
+		double average = orderTotal/orderSize;
+		
+		return average;		
+	}
+
+	
+	//method used to print First Requirement in console
+	public void printWithoutSaleRepConsole() {
+		System.out.printf("%s | %s \n\r", this.getCustomerName(),this.getCity());
 	}
 	
 	
-	
-
-//	public Payment getHighestAverage() {
-//		Payment highest = null;
-//		
-//		for(Order o : orders) 
-//		{
-//			if(o.getAmount() > highest.getAmount()) {
-//				highest = p;
-//			}
-//			
-//		}
-//		return highest;
-//	}
+	//method used to print Third Requirement in console
+	public void printAverageOrderTimeConsole() {
+		System.out.printf("%d | %s | %.2f days \n\r", this.getCustomerNumber(), this.getCustomerName(),this.getOrderTimeLapseAverage());
+	}
 	
 
 }
