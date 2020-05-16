@@ -11,7 +11,6 @@ import java.util.Date;
 
 import org.junit.*;
 import com.mysql.*;
-import org.junit.Before;
 
 
 public class CustomerDataTest {
@@ -19,6 +18,51 @@ public class CustomerDataTest {
 	private CustomerData customerData = null;
 	private OrderData orderData = null;
 	private BaseQuery baseQuery = null;
+	
+	private boolean SameDataReq1(ResultSet expectedRs, ArrayList<Customer> actual) throws SQLException
+	{
+		int i = 0;
+		while(expectedRs.next()) {
+			
+			String customerName = expectedRs.getString("customerName");
+			String city = expectedRs.getString("City");
+			
+			Customer c = actual.get(i);
+			boolean sameCity = c.getCity().equals(city);
+			String cname = c.getCustomerName();
+			boolean sameName = cname.equals(customerName);
+			boolean haveSameValue = ( sameName && sameCity);
+					
+			if( !(haveSameValue))
+				return false;
+			
+			i++;
+		}
+		
+		return true;
+	}
+	
+	private boolean SameDataReq3(ResultSet expectedRs, ArrayList<Customer> actual) throws SQLException
+	{
+		int i = 0;
+		double delta = 0.001;
+		while(expectedRs.next()) {
+			double average = expectedRs.getDouble("average");
+		
+			Customer c = actual.get(i);
+			double cAverage = c.getOrderTimeLapseAverage();
+			boolean sameAverage = Math.abs(cAverage - average) <= delta;
+			
+			boolean haveSameValue = (sameAverage);
+					
+			if( !(haveSameValue))
+				return false;
+			
+			i++;
+		}
+		return true;
+	}
+	
 	
 	@Before
 	public void Setup() {
@@ -40,16 +84,32 @@ public class CustomerDataTest {
 	}
 	
 	//Requirement 1
-	
+	//Customer without sales rep count test
 	@Test
-	public void can_retrieve_customers_without_sales_representative() throws SQLException {
+	public void can_count_customers_without_sales_representative() throws SQLException {
 		ArrayList<Customer> customers = customerData.AllWithoutSalesRepresentative();
 		assertEquals(22,customers.size());
 	}
 	
 	
+	//Customer without sales rep SQL query test
+	@Test
+	public void Can_retrieve_customers_without_sales_representative() throws SQLException{
+		
+		
+		ArrayList<Customer> customers = customerData.AllWithoutSalesRepresentative();
+		
+		String sql = "select customerName, City from customers where salesRepEmployeeNumber is NULL";
+		
+		ResultSet expectedCustomersRs = baseQuery.TestQuery(sql);
+		
+		assertTrue(SameDataReq1(expectedCustomersRs,customers));
+	}
+	
+	
 	
 	//requirement 3
+	//Customer timelapse Count test
 	@Test
 	public void Can_retrieve_avg_order_time_lapse_for_a_customer() throws SQLException{
 		
@@ -59,11 +119,29 @@ public class CustomerDataTest {
 		
 		assertEquals( 2.3333 ,customer.getOrderTimeLapseAverage(), 0.0001);
 	}
+	
+	
+	//Customer timelapse Order sort SQL query test
+	@Test
+	public void can_sort_orders_by_time_lapse_sqltest() throws SQLException{
+		
+		
+		ArrayList<Customer> customers = customerData.AllWithOrders();
+		customerData.SortForAverageTimeLapse(customers);
+		
+		String sql = "Select  o.customerNumber, c.customerName,avg(datediff(o.shippedDate, o.OrderDate)) as average from orders o inner join customers c on o.customerNumber = c.customerNumber "
+				+ "where o.shippeddate is not NULL Group by o.customernumber order by average desc;";
+		
+		ResultSet expectedCustomersRs = baseQuery.TestQuery(sql);
+		
+		assertTrue(SameDataReq3(expectedCustomersRs,customers));
+		
+	}
 
 	
-	//Customer time Order sort using mock data
+	//Customer timelapse Order sort using mock data
 	@Test
-	public void can_sort_orders_by_time_lapse() throws ParseException {
+	public void can_sort_orders_by_time_lapse_mock() throws ParseException {
 		
 		// customer 1
 		// ----------
@@ -105,7 +183,7 @@ public class CustomerDataTest {
 		Order o5 = new Order(5,dt2020Jan01,dt2020Jan01,dt2020Jan02, "A","comment 1", 105);
 		Order o6 = new Order(6,dt2020Jan01,dt2020Jan01,dt2020Jan04, "A","comment 1", 105);
 		
-		// expected abg : 2
+		// expected avg : 2
 		
 		ArrayList<Order> orders3 = new ArrayList<Order>();
 		orders3.add(o5);
@@ -141,6 +219,7 @@ public class CustomerDataTest {
 		assertTrue(c3cn == ac2);
 	
 	}
+	
 	
 
 	@After 

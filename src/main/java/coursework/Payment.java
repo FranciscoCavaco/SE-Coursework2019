@@ -12,6 +12,14 @@ public class Payment {
 	private double amount;
 	
 	
+	//Constructor for Testing
+	public Payment(int CustomerNumber, String CheckNumber, double Amount) {
+		super();
+		this.customerNumber = CustomerNumber;
+		this.checkNumber = CheckNumber;
+		this.amount = Amount;
+	}
+	
 	//Constructor for Req 2
 	public Payment(Customer c, Payment p) {
 		super();
