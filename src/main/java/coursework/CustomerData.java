@@ -1,6 +1,5 @@
 package coursework;
 
-import java.io.Console;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;

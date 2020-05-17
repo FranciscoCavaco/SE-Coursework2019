@@ -4,13 +4,9 @@ package coursework;
 import static org.junit.Assert.*;
 
 import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.Date;
 
 import org.junit.*;
-import com.mysql.*;
 import org.junit.Before;
 
 

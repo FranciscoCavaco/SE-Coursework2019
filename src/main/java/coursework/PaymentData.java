@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
-import com.mysql.cj.conf.ConnectionUrlParser.Pair;
-
 public class PaymentData extends BaseQuery{
 
 	private CustomerData customerData;

@@ -1,7 +1,5 @@
 package coursework;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
@@ -21,8 +19,6 @@ public class Customer   {
 	private String country;
 	private int salesRepEmployeeNumber;
 	private double creditLimit;
-	
-	private ArrayList<Payment> payments;
 	private ArrayList<Order> orders;
 	
 	//Constructor (with attributes needed for Req 1)

@@ -10,8 +10,6 @@ import java.util.*;
 import java.util.Date;
 
 import org.junit.*;
-import com.mysql.*;
-
 
 public class CustomerDataTest {
 	
@@ -211,12 +209,10 @@ public class CustomerDataTest {
 		int ac0 = customers.get(0).getCustomerNumber();
 		int ac1 = customers.get(1).getCustomerNumber();
 		int ac2 = customers.get(2).getCustomerNumber();
-		boolean is = c1cn == ac0;
-		
 		
 		assertTrue("This is not expected customer...", c2cn == ac0);
-		assertTrue(c1cn == ac1);
-		assertTrue(c3cn == ac2);
+		assertTrue("This is not expected customer...", c1cn == ac1);
+		assertTrue("This is not expected customer...", c3cn == ac2);
 	
 	}
 	
