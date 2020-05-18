@@ -17,12 +17,12 @@ public class Order {
 	
 	
 	//Constructor
-	public Order (int OrderNumber, LocalDate dt2020Jan01, LocalDate dt2020Jan012, LocalDate dt2020Jan05, String Status, String Comments, int CustomerNumber) {
+	public Order (int OrderNumber, LocalDate orderDate, LocalDate requiredDate, LocalDate shippedDate, String Status, String Comments, int CustomerNumber) {
 		super();
 		this.orderNumber = OrderNumber;
-		this.orderDate = dt2020Jan01;
-		this.requiredDate = dt2020Jan012;
-		this.shippedDate = dt2020Jan05;
+		this.orderDate = orderDate;
+		this.requiredDate = requiredDate;
+		this.shippedDate = shippedDate;
 		this.status = Status;
 		this.comments = Comments;
 		this.customerNumber = CustomerNumber;
@@ -65,6 +65,7 @@ public class Order {
 		// note: issue with daylight savings require a more robust handling of dates. not enought to datediff it and divide by number of days...
 		LocalDate start = this.getOrderDate();
 		LocalDate end = this.getShippedDate();
+		
 		long result = ChronoUnit.DAYS.between( start, end);
 		
 		return result;

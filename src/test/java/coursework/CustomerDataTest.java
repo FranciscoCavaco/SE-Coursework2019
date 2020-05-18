@@ -5,11 +5,8 @@ import static org.junit.Assert.*;
 
 import java.sql.*;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.Date;
 
 import org.junit.*;
 
@@ -67,9 +64,9 @@ public class CustomerDataTest {
 	public void Setup() {
 		System.out.println("Running: Setup");
 		
-		orderData = new OrderData("root","Xixoxixo2010a");
-		customerData = new CustomerData("root","Xixoxixo2010a", orderData);
-		baseQuery = new BaseQuery("root","Xixoxixo2010a");
+		orderData = new OrderData("root","");
+		customerData = new CustomerData("root","", orderData);
+		baseQuery = new BaseQuery("root","");
 	}
 	
 	//Build up tests
