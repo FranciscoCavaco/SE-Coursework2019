@@ -2,6 +2,7 @@ package coursework;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -18,9 +19,15 @@ public class OrderData extends BaseQuery{
 	private Order build(ResultSet rs) throws SQLException
 	{
 		int orderNumber = rs.getInt("OrderNumber");
-		Date orderDate = rs.getDate("OrderDate");
-		Date requiredDate = rs.getDate("RequiredDate");
-		Date shippedDate = rs.getDate("ShippedDate");
+		
+		Date orderDateSql = rs.getDate("OrderDate");
+		LocalDate orderDate = orderDateSql != null ? LocalDate.parse(rs.getDate("OrderDate").toString()) : null;
+		
+		Date requiredDateSql = rs.getDate("RequiredDate");
+		LocalDate requiredDate = requiredDateSql != null ? LocalDate.parse(rs.getDate("RequiredDate").toString()): null;
+		
+		Date shippedDateSql = rs.getDate("ShippedDate");
+		LocalDate shippedDate = shippedDateSql != null ? LocalDate.parse(rs.getDate("ShippedDate").toString()): null;
 		String status = rs.getString("Status");
 		String comments = rs.getString("Comments");
 		int customerNumber = rs.getInt("CustomerNumber");

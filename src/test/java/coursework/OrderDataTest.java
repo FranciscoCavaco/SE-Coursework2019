@@ -18,7 +18,7 @@ public class OrderDataTest {
 	public void Setup() {
 		System.out.println("Running: Setup");
 		
-		orderData = new OrderData("root","");
+		orderData = new OrderData("root","Xixoxixo2010a");
 	}
 
 	@Test

@@ -51,12 +51,11 @@ public class PaymentDataTest {
 	public void Setup() {
 		System.out.println("Running: Setup");
 		
-		orderData = new OrderData("root","");
-		customerData = new CustomerData("root","", orderData);
-		paymentData = new PaymentData("root","", customerData);
-		baseQuery = new BaseQuery("root","");
+		orderData = new OrderData("root","Xixoxixo2010a");
+		customerData = new CustomerData("root","Xixoxixo2010a", orderData);
+		paymentData = new PaymentData("root","Xixoxixo2010a", customerData);
+		baseQuery = new BaseQuery("root","Xixoxixo2010a");
 	}
-
 	
 	//Build up tests
 	@Test

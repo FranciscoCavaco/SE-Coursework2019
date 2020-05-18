@@ -6,6 +6,8 @@ import static org.junit.Assert.*;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.Date;
 
@@ -27,8 +29,7 @@ public class CustomerDataTest {
 			
 			Customer c = actual.get(i);
 			boolean sameCity = c.getCity().equals(city);
-			String cname = c.getCustomerName();
-			boolean sameName = cname.equals(customerName);
+			boolean sameName = c.getCustomerName().equals(customerName);
 			boolean haveSameValue = ( sameName && sameCity);
 					
 			if( !(haveSameValue))
@@ -66,9 +67,9 @@ public class CustomerDataTest {
 	public void Setup() {
 		System.out.println("Running: Setup");
 		
-		orderData = new OrderData("root","");
-		customerData = new CustomerData("root","", orderData);
-		baseQuery = new BaseQuery("root","");
+		orderData = new OrderData("root","Xixoxixo2010a");
+		customerData = new CustomerData("root","Xixoxixo2010a", orderData);
+		baseQuery = new BaseQuery("root","Xixoxixo2010a");
 	}
 	
 	//Build up tests
@@ -143,12 +144,13 @@ public class CustomerDataTest {
 		
 		// customer 1
 		// ----------
-		Date dt2020Jan01 = new SimpleDateFormat("yyyy-MM-dd").parse("2020-01-01");
-		Date dt2020Jan02 = new SimpleDateFormat("yyyy-MM-dd").parse("2020-01-02");
-		Date dt2020Jan04 = new SimpleDateFormat("yyyy-MM-dd").parse("2020-01-04");
-		Date dt2020Jan05 = new SimpleDateFormat("yyyy-MM-dd").parse("2020-01-05");
-		Date dt2020Jan07 = new SimpleDateFormat("yyyy-MM-dd").parse("2020-01-07");
-		Date dt2020Jan09 = new SimpleDateFormat("yyyy-MM-dd").parse("2020-01-09");
+		LocalDate dt2020Jan01 = LocalDate.parse("2020-01-01");
+		
+		LocalDate dt2020Jan02 = LocalDate.parse("2020-01-02");
+		LocalDate dt2020Jan04 = LocalDate.parse("2020-01-04");
+		LocalDate dt2020Jan05 = LocalDate.parse("2020-01-05");
+		LocalDate dt2020Jan07 = LocalDate.parse("2020-01-07");
+		LocalDate dt2020Jan09 = LocalDate.parse("2020-01-09");
 		
 		
 		Order o1 = new Order(1,dt2020Jan01,dt2020Jan01,dt2020Jan05, "A","comment 1", 103);

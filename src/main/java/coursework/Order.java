@@ -1,26 +1,28 @@
 package coursework;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class Order {
 	
 	//Attribute declaration
 	private int orderNumber;
-	private Date orderDate;
-	private Date requiredDate;
-	private Date shippedDate;
+	private LocalDate orderDate;
+	private LocalDate requiredDate;
+	private LocalDate shippedDate;
 	private String status;
 	private String comments;
 	private int customerNumber;
 	
 	
 	//Constructor
-	public Order (int OrderNumber, Date OrderDate, Date RequiredDate, Date ShippedDate, String Status, String Comments, int CustomerNumber) {
+	public Order (int OrderNumber, LocalDate dt2020Jan01, LocalDate dt2020Jan012, LocalDate dt2020Jan05, String Status, String Comments, int CustomerNumber) {
 		super();
 		this.orderNumber = OrderNumber;
-		this.orderDate = OrderDate;
-		this.requiredDate = RequiredDate;
-		this.shippedDate = ShippedDate;
+		this.orderDate = dt2020Jan01;
+		this.requiredDate = dt2020Jan012;
+		this.shippedDate = dt2020Jan05;
 		this.status = Status;
 		this.comments = Comments;
 		this.customerNumber = CustomerNumber;
@@ -32,15 +34,15 @@ public class Order {
 		return this.orderNumber;
 	}
 
-	public Date getOrderDate() {
+	public LocalDate getOrderDate() {
 		return this.orderDate;
 	}
 
-	public Date getRequiredDate() {
+	public LocalDate getRequiredDate() {
 		return this.requiredDate;
 	}
 
-	public Date getShippedDate() {
+	public LocalDate getShippedDate() {
 		return this.shippedDate;
 	}
 
@@ -58,11 +60,14 @@ public class Order {
 	
 	
 	//calculates time between order date and shipping data
-	public int getShippingTimeLapse(){
-		int diff = 0;
-		long convertToDay = 86400000;
-		diff = (int) ((this.getShippedDate().getTime())/convertToDay - (this.getOrderDate().getTime())/convertToDay);
-		return diff;
+	public long getShippingTimeLapse(){
+		
+		// note: issue with daylight savings require a more robust handling of dates. not enought to datediff it and divide by number of days...
+		LocalDate start = this.getOrderDate();
+		LocalDate end = this.getShippedDate();
+		long result = ChronoUnit.DAYS.between( start, end);
+		
+		return result;
 	}
 
 }
